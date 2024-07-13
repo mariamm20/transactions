@@ -21,7 +21,7 @@ export function Home() {
 function TransactionsList(props) {
     const [Transactions, setTransactions] = useState([]);
     const [Customers, setCustomers] = useState([]);
-
+    const [records , setRecords] = useState(Transactions);
     function fetchTransactions() {
         fetch('http://localhost:3004/transactions')
             .then(response => {
@@ -68,11 +68,29 @@ function TransactionsList(props) {
             .catch(error => console.log(error));
     }
 
+    function filter(event) {
+        const query = event.target.value.toLowerCase();
+        const filteredTransactions = Transactions.filter(transaction => {
+            const customer = Customers.find(customer => customer.id === transaction.customer_id);
+            const customerName = customer ? customer.name.toLowerCase() : '';
+            return (
+                customerName.includes(query) ||
+                transaction.amount.toString().includes(query) // Search by amount
+            );
+        });
+        setRecords(filteredTransactions); // Update records with filtered transactions
+    }
+
     return (
         <>
             <h2 className="text-center mb-3">Transactions List</h2>
             <button onClick={() => props.showForm({})} type="button" className="btn btn-primary me-2">Make Transaction</button>
             <button onClick={() => fetchTransactions()} type="button" className="btn btn-outline-primary me-2">Refresh</button>
+
+<br/>
+<br/>
+<input type="text" className="form-control" placeholder="Search by name" aria-label="Search" onChange={(e) => filter(e)}/>
+
             <table className="table table-bordered">
                 <thead>
                     <tr>
@@ -85,7 +103,7 @@ function TransactionsList(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {Transactions.map((transaction, index) => (
+                    {records.map((transaction, index) => (
                         <tr key={index}>
                             <td>{transaction.id}</td>
                             <td>{Customers.find(customer => customer.id == transaction.customer_id)?.name}</td>

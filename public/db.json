@@ -59,9 +59,9 @@
       "amount": 2500
     },
     {
-      "id": "9",
+      "id": 9,
       "customer_id": "2",
-      "amount": "700",
+      "amount": "12",
       "date": "2024-07-13"
     }
   ]
