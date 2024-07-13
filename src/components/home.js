@@ -19,9 +19,15 @@ export function Home() {
 }
 
 function TransactionsList(props) {
-    const [Transactions, setTransactions] = useState([]);
-    const [Customers, setCustomers] = useState([]);
-    const [records , setRecords] = useState(Transactions);
+    const [transactions, setTransactions] = useState([]);
+    const [customers, setCustomers] = useState([]);
+    const [records, setRecords] = useState([]);
+
+    useEffect(() => {
+        fetchTransactions();
+        fetchCustomers();
+    }, []);
+
     function fetchTransactions() {
         fetch('http://localhost:3004/transactions')
             .then(response => {
@@ -32,9 +38,11 @@ function TransactionsList(props) {
             })
             .then(data => {
                 setTransactions(data);
+                setRecords(data); // Initialize records with all transactions
             })
             .catch(error => console.log(error));
     }
+
     function fetchCustomers() {
         fetch('http://localhost:3004/customers')
             .then(response => {
@@ -48,12 +56,6 @@ function TransactionsList(props) {
             })
             .catch(error => console.log(error));
     }
-  
-
-    useEffect(() => {
-        fetchTransactions();
-        fetchCustomers();
-    }, []);
 
     function deleteTransaction(id) {
         fetch(`http://localhost:3004/transactions/${id}`, {
@@ -70,14 +72,19 @@ function TransactionsList(props) {
 
     function filter(event) {
         const query = event.target.value.toLowerCase();
-        const filteredTransactions = Transactions.filter(transaction => {
-            const customer = Customers.find(customer => customer.id === transaction.customer_id);
-            const customerName = customer ? customer.name.toLowerCase() : '';
+        const filteredTransactions = transactions.filter(transaction => {
+            const customer = customers.find(customer => customer.id === transaction.customer_id);
+            if (!customer) return false; // If no customer found, skip this transaction
+
+            const customerName = customer.name.toLowerCase();
+            const amountString = transaction.amount.toString();
+
             return (
                 customerName.includes(query) ||
-                transaction.amount.toString().includes(query) // Search by amount
+                amountString.includes(query)
             );
         });
+
         setRecords(filteredTransactions); // Update records with filtered transactions
     }
 
@@ -87,11 +94,10 @@ function TransactionsList(props) {
             <button onClick={() => props.showForm({})} type="button" className="btn btn-primary me-2">Make Transaction</button>
             <button onClick={() => fetchTransactions()} type="button" className="btn btn-outline-primary me-2">Refresh</button>
 
-<br/>
-<br/>
-<input type="text" className="form-control" placeholder="Search by name" aria-label="Search" onChange={(e) => filter(e)}/>
+            <br /><br />
+            <input type="text" className="form-control" placeholder="Search by name or amount" aria-label="Search" onChange={(e) => filter(e)} />
 
-            <table className="table table-bordered">
+            <table className="table table-bordered mt-3">
                 <thead>
                     <tr>
                         <th scope="col">Transaction Id</th>
@@ -106,7 +112,7 @@ function TransactionsList(props) {
                     {records.map((transaction, index) => (
                         <tr key={index}>
                             <td>{transaction.id}</td>
-                            <td>{Customers.find(customer => customer.id == transaction.customer_id)?.name}</td>
+                            <td>{customers.find(customer => customer.id === transaction.customer_id)?.name}</td>
                             <td>{transaction.customer_id}</td>
                             <td>{transaction.date}</td>
                             <td>{transaction.amount}</td>

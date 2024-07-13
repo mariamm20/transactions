@@ -23,45 +23,39 @@
   ],
   "transactions": [
     {
-      "id": "1",
-      "customer_id": 5,
-      "date": "2022-01-01",
-      "amount": 2500
+      "id": 1,
+      "customer_id": "1",
+      "amount": "100",
+      "date": "2024-07-13"
     },
     {
-      "id": "2",
-      "customer_id": 1,
-      "date": "2022-01-02",
-      "amount": 2000
-    },
-    {
-      "id": "5",
-      "customer_id": 2,
-      "date": "2022-01-02",
-      "amount": 1300
-    },
-    {
-      "id": "6",
-      "customer_id": 4,
-      "date": "2022-01-01",
-      "amount": 750
-    },
-    {
-      "id": "7",
-      "customer_id": 3,
-      "date": "2022-01-02",
-      "amount": 1250
-    },
-    {
-      "id": "8",
-      "customer_id": 5,
-      "date": "2022-01-01",
-      "amount": 2500
-    },
-    {
-      "id": 9,
+      "id": 2,
       "customer_id": "2",
-      "amount": "12",
+      "amount": "200",
+      "date": "2024-07-13"
+    },
+    {
+      "id": 3,
+      "customer_id": "3",
+      "amount": "300",
+      "date": "2024-07-13"
+    },
+    {
+      "id": 4,
+      "customer_id": "4",
+      "amount": "400",
+      "date": "2024-07-13"
+    },
+    {
+      "id": 5,
+      "customer_id": "5",
+      "amount": "500",
+      "date": "2024-07-13"
+    },
+    {
+      "id": 6,
+      "customer_id": "4",
+      "amount": "2222",
       "date": "2024-07-13"
     }
   ]
