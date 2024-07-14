@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Navbar , Footer } from './components/layout';
-import Home from './components/Home';
+import Home from './components/home';
 import { Customers } from './components/customers';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App(){
