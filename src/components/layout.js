@@ -1,20 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { HouseFill, PeopleFill } from 'react-bootstrap-icons';
+
 export function Navbar(){
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow py-3 mb-3">
-  <div className="container">
-    <Link className="navbar-brand" to="/">Transactions</Link>
+        <nav className="navbar navbar-expand-lg navbar-light  py-2 my-5 d-flex flex-column">
+  <div className="container flex-row flex-lg-column  align-items-baseline">
+    
+    <Link className="navbar-brand mb-3" to="/">
+    <img src="logo-no-background.png" alt="" width={"250"} className="d-inline-block align-text-top"/>
+    </Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <Link className="nav-link text-dark" aria-current="page" to="/">Home</Link>
+      <ul className="navbar-nav flex-row flex-lg-column">
+        <li className="nav-item mb-3">
+          <Link className="nav-link text-dark fw-bold d-flex align-items-center gap-3 " aria-current="page" to="/">
+          <HouseFill color="Black" size={16} />
+          <p className="p-0 m-0">Home</p>
+          </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link text-dark" to="/customers">Customers</Link>
+          <Link className="nav-link text-dark fw-bold d-flex align-items-center gap-3" to="/customers">
+          <PeopleFill color="black" size={16} />
+          <p className="p-0 m-0">Customers</p>
+          </Link>
         </li>
         
       </ul>
@@ -29,7 +40,7 @@ export function Navbar(){
 export function Footer(){
     return(
         <footer>
-            <div className="container p-3 mt-5 border-top">
+            <div className="container p-3 mt-5">
                 <small className="text-muted text-center d-block">© 2023 Company, Inc</small>
             </div>
         </footer>
