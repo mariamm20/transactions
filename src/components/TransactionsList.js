@@ -100,6 +100,7 @@ function TransactionsList(props) {
         });
 
         setFilteredTransactions(filtered);
+        calculateTransactionsPerDay(filtered);
     }
 
 
@@ -110,6 +111,7 @@ function TransactionsList(props) {
 
     return (
         <>
+        <p className="text-secondary">Welcome Admin</p>
             <div className="d-flex align-items-center gap-3 py-1 mb-3">
                 <Grid color="black" size={32} />
                 <h2 className="m-0">
@@ -157,6 +159,21 @@ function TransactionsList(props) {
                             }
                         ]
                     }}
+                    options={{
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    min: 0, 
+                                    max: Math.max(...chartDataValues) + 1 ,
+                                    ticks: {
+                                        stepSize: 1, 
+                                        callback: function(value) { 
+                                            return Number.isInteger(value) ? value : null;
+                                        }
+                                    }
+                                }
+                            }
+                        }}
                 />
                 </div>
 
@@ -169,7 +186,7 @@ function TransactionsList(props) {
                     Transaction List
                 </h2>
             </div>
-<div className="container px-5">
+<div className="container px-lg-5">
             <div className="input-group mb-3">
                 <div className="input-group-prepend d-flex">
                     <span className="border-end-0 bg-none border-start border-bottom border-top p-2" id="basic-addon1">
@@ -184,8 +201,8 @@ function TransactionsList(props) {
                     onChange={(e) => filterTransactions(e)}
                 />
             </div>
-
-            <table className="table table-bordered table-responsive">
+<div className="overflow-auto">
+            <table className="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Transaction Id</th>
@@ -219,6 +236,7 @@ function TransactionsList(props) {
                     )}
                 </tbody>
             </table>
+            </div>
 </div>
             {/* <div className="d-flex ">
                 <Bar

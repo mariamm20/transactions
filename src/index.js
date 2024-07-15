@@ -9,7 +9,7 @@ function App(){
   return (
     <div className=''>
     <BrowserRouter>
-    <div className='d-flex flex-lg-nowrap flex-wrap'>
+    <div className='d-flex flex-lg-nowrap flex-wrap justify-content-lg-baseline justify-content-center align-items-lg-baseline align-items-center'>
       <Navbar/>
 <Routes>
     <Route path="/" element={<Home/>} />

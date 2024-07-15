@@ -22,7 +22,9 @@ export function Customers() {
             .catch(error => console.log(error));
     }
     return (
-        <div className="container my-5">
+        <div className="container py-lg-2 my-lg-5">
+                <p className="text-secondary">Welcome Admin</p>
+
             <div className="d-flex align-items-center gap-3 py-1 mb-3">
                 <PeopleFill color="black" size={32} />
                 <h2 className="m-0">

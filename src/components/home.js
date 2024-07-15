@@ -14,7 +14,7 @@ export default function Home() {
     }
     
     return (
-        <div className="container my-5 py-2">
+        <div className="container my-lg-5 py-lg-2">
             {content}
         </div>
     );
