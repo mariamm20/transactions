@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PeopleFill } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 
 
 export function Customers() {
@@ -45,7 +46,11 @@ export function Customers() {
                         customers.map((customer, index) => (
                             <tr key={index}>
                                 <td>{customer.id}</td>
-                                <td>{customer.name}</td>
+                                <td>
+                                <Link to={`/customers/${customer.id}`} className="text-decoration-none">
+                                {customer.name}
+                                </Link>
+                                </td>
                                 
                             </tr>
                         ))

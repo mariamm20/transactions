@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Search, Grid, PeopleFill, Wallet, List } from 'react-bootstrap-icons';
+import { Link } from "react-router-dom";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -190,7 +191,7 @@ function TransactionsList(props) {
                 </h2>
             </div>
             <p className="container px-lg-5 text-secondary">
-                        By default this table is sorted based on transactions id ascending to sort ascending or descending order based on amount click on sort button.
+                        By default this table is sorted based on transactions id ascending to sort ascending or descending order based on <strong>amount</strong> click on sort button.
                 </p>
             <div className="container px-lg-5">
                 <div className="input-group mb-3">
@@ -207,7 +208,7 @@ function TransactionsList(props) {
                         onChange={(e) => filterTransactions(e)}
                     />
                     <button className="btn btn-warning" onClick={sortTransactions}>
-                        Sort by Amount ({sortOrder === 'asc' ? 'Ascending' : 'Descending'})
+                        Sort ({sortOrder === 'asc' ? 'Ascending' : 'Descending'})
                     </button>
                 </div>
                 
@@ -226,7 +227,11 @@ function TransactionsList(props) {
                             {filteredTransactions.map((transaction, index) => (
                                 <tr key={index}>
                                     <td>{transaction.id}</td>
-                                    <td>{customers.find(customer => customer.id === transaction.customer_id)?.name}</td>
+                                    <td>
+                                    <Link to={`/customers/${transaction.customer_id}`} className="text-decoration-none">
+                                    {customers.find(customer => customer.id === transaction.customer_id)?.name}
+                                    </Link>
+                                    </td>
                                     <td>{transaction.customer_id}</td>
                                     <td>{transaction.date}</td>
                                     <td>{transaction.amount}</td>
